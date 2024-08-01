@@ -21,7 +21,7 @@ import internshipRoutes from "./src/features/internships/routes/internship.route
 const app = express();
 app.use(
   cors({
-    origin: `https://shivshaktiagroindustries.onrender.com`,
+    origin: `https://shivshaktiagroindustries.vercel.app`,
     credentials: true,
   })
 );
