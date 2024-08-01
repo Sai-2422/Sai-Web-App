@@ -20,7 +20,7 @@ export const createNewUser = async (req, res, next) => {
   const profileImg = req.file;
   try {
     if (profileImg) {
-      const base64Image = imageData.toString("base64");
+      const base64Image = profileImg.buffer.toString('base64');
       updateData.profileImg = `data:${profileImg.mimetype};base64,${base64Image}`;
     }
     const newUser = await createNewUserRepo(updateData);
@@ -222,7 +222,7 @@ export const updateUserProfile = async (req, res, next) => {
       updateData.profileImg = null;
     }
     if (profileImg) {
-      const base64Image = imageData.toString("base64");
+      const base64Image = profileImg.buffer.toString('base64');
       updateData.profileImg = `data:${profileImg.mimetype};base64,${base64Image}`;
     }
 
@@ -299,7 +299,7 @@ export const updateUserProfileAndRole = async (req, res, next) => {
     }
 
     if (profileImg) {
-      const base64Image = imageData.toString("base64");
+      const base64Image = profileImg.buffer.toString('base64');
       updateData.profileImg = `data:${profileImg.mimetype};base64,${base64Image}`;
     }
 

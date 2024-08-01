@@ -7,6 +7,7 @@ import {
   updateProduct,
 } from "../controllers/product.controller.js";
 import { auth, authByUserRole } from "../../../../middlewares/auth.js";
+import upload from "../../../../middlewares/fileupload.middleware.js";
 
 const router = express.Router();
 
@@ -18,6 +19,7 @@ router
   .post(
     auth,
     authByUserRole("admin"),
+    upload.single("productImg"),
     addNewProduct
   );
 
@@ -26,6 +28,7 @@ router
   .put(
     auth,
     authByUserRole("admin"),
+    upload.single("productImg"),
     updateProduct
   );
 

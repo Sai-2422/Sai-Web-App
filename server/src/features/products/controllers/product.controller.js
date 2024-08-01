@@ -14,7 +14,7 @@ export const addNewProduct = async (req, res, next) => {
     if (!productImg) {
       return next(new ApplicationError(400, "Product image is required."));
     } else {
-      const base64Image = imageData.toString("base64");
+      const base64Image = productImg.buffer.toString('base64');
       updateData.productImg = `data:${productImg.mimetype};base64,${base64Image}`;
     }
 
@@ -66,7 +66,7 @@ export const updateProduct = async (req, res, next) => {
       updateData.productImg = null;
     }
     if (productImg) {
-      const base64Image = imageData.toString("base64");
+      const base64Image = productImg.buffer.toString('base64');
       updateData.productImg = `data:${productImg.mimetype};base64,${base64Image}`;
     }
     const updatedProduct = await updateProductRepo(productId, updateData);
