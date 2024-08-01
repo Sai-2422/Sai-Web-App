@@ -1,0 +1,25 @@
+.imagePreview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #28a745;
+  margin-bottom: 15px;
+}
+
+.required {
+  color: red;
+}
+
+.maybe {
+  color: gray;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gradientBackground {
+  background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+}

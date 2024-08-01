@@ -1,0 +1,25 @@
+/* ApprenticeshipForm.module.css */
+
+.container {
+  padding: 20px;
+}
+
+.heading {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+.description {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.infoCard {
+  margin-top: 20px;
+}
+
+.infoCard .btn {
+  margin-top: 10px;
+}

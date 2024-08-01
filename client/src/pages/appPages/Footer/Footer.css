@@ -1,0 +1,21 @@
+.footer {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.footer h5 {
+  color: #555;
+}
+
+.footer ul li {
+  list-style: none;
+}
+
+.footer ul li a {
+  color: #555;
+  text-decoration: none;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}

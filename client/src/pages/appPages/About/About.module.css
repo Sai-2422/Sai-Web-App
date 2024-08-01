@@ -1,0 +1,17 @@
+.welcomeContainer {
+  background-color: #f8f9fa;
+  padding: 50px 20px;
+}
+
+.ownerImage {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.companyName {
+  color: #007bff;
+  margin-bottom: 20px;
+}

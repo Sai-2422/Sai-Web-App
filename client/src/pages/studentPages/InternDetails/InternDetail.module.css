@@ -1,0 +1,49 @@
+/* InternDetail.module.css */
+
+.container {
+  padding: 1rem;
+}
+
+.internCard {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileImage {
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.imageContainer {
+  margin-bottom: 1rem;
+}
+
+.imageOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure overlay is above all other content */
+}
+
+.enlargedImage {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
