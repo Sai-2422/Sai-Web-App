@@ -21,7 +21,7 @@ import internshipRoutes from "./src/features/internships/routes/internship.route
 const app = express();
 app.use(
   cors({
-    origin: `http://localhost:${process.env.CLI_PORT}`,
+    origin: `https://shivshaktiagroindustries.onrender.com`,
     credentials: true,
   })
 );

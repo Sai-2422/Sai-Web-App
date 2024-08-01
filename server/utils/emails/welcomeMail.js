@@ -14,7 +14,7 @@ export const sendWelcomeEmail = async (user) => {
       from: process.env.SAI_SMPT_MAIL,
       to: user.email,
       subject: "Welcome to Shivshakti Agro Industries",
-      text: `Hello, ${user.name}\n\nThank you for registering with Shivshakti Agro Industries. We're excited to have you as a new member of our community.\n\nGet Started: http://localhost:${process.env.CLI_PORT}\n\nBest regards,\nShivshakti Agro Industries`,
+      text: `Hello, ${user.name}\n\nThank you for registering with Shivshakti Agro Industries. We're excited to have you as a new member of our community.\n\nGet Started: https://shivshaktiagroindustries.onrender.com\n\nBest regards,\nShivshakti Agro Industries`,
       html: `
       <!DOCTYPE html>
       <html lang="en">
@@ -84,7 +84,7 @@ export const sendWelcomeEmail = async (user) => {
               <p>If you have any questions or require technical support, feel free to reach out us.</p>
               <p>For student inquiries, contact Harshad Kanchangire at +91 8767578894.</p>
               <div class="button-container">
-                  <a class="button" href="http://localhost:${process.env.CLI_PORT}">Get Started</a>
+                  <a class="button" href="https://shivshaktiagroindustries.onrender.com">Get Started</a>
               </div>
               <p>Thank you for joining our community!</p>
               <p>Best regards,<br>Shivshakti Agro Industries<br>Proprietor: Revansidha Kanchangire<br>Contact:+91 9850037650</p>
