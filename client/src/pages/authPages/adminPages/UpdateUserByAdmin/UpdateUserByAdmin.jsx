@@ -32,7 +32,6 @@ const UpdateUserByAdmin = () => {
 
   const [formData, setFormData] = useState({});
   const [removeImage, setRemoveImage] = useState(false);
-  const [profileImg, setProfileImg] = useState(null);
   const [previewImg, setPreviewImg] = useState(defaultProfileImage);
   const [role, setRole] = useState("");
 
@@ -62,23 +61,9 @@ const UpdateUserByAdmin = () => {
     setRole(e.target.value);
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        toast.error("Profile image size should be less than 2MB");
-        return;
-      }
-      setProfileImg(file);
-      setPreviewImg(URL.createObjectURL(file));
-      setRemoveImage(false);
-    }
-  };
-
   const handleRemoveImage = () => {
     setRemoveImage(true);
     setPreviewImg(defaultProfileImage);
-    setProfileImg(null);
     document.getElementById("formProfileImg").value = "";
   };
 
@@ -91,10 +76,7 @@ const UpdateUserByAdmin = () => {
     data.append("address", formData.address);
     data.append("role", role);
 
-    if (profileImg) {
-      data.append("profileImg", profileImg);
-    }
-
+    // Append removeImage flag if image is to be removed
     if (removeImage) {
       data.append("removeImage", true);
     }
@@ -119,7 +101,6 @@ const UpdateUserByAdmin = () => {
       address: "",
     });
     setPreviewImg(defaultProfileImage);
-    setProfileImg(null);
     setRemoveImage(false);
     setRole("");
   };
@@ -152,7 +133,7 @@ const UpdateUserByAdmin = () => {
               </Button>
             </Form.Group>
           </div>
-          <Form onSubmit={handleSubmit} encType="multipart/form-data">
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>
                 Name <span className={styles.required}>*</span>
@@ -227,16 +208,6 @@ const UpdateUserByAdmin = () => {
                   inline
                 />
               ))}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formProfileImg">
-              <Form.Label>
-                Profile Image (max 2MB)<span className={styles.maybe}>*</span>
-              </Form.Label>
-              <Form.Control
-                type="file"
-                name="profileImg"
-                onChange={handleImageChange}
-              />
             </Form.Group>
             <div className={styles.buttonContainer}>
               <Button variant="success" type="submit" disabled={loading}>
