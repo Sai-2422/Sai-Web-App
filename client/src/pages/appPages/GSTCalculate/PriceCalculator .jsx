@@ -8,6 +8,7 @@ const styles = {
     borderRadius: "10px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     marginTop: "2rem",
+    marginBottom: "2rem",
   },
   header: {
     marginBottom: "1rem",
