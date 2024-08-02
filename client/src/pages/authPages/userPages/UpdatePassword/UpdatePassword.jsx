@@ -68,7 +68,7 @@ const UpdatePassword = () => {
                 Current Password <span className={styles.required}>*</span>
               </Form.Label>
               <Form.Control
-                type="password"
+                type="text"
                 name="currentPassword"
                 value={formData.currentPassword}
                 onChange={handleChange}
