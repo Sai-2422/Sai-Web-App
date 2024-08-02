@@ -21,7 +21,7 @@ const buttonStyle = {
   width: "100%",
 };
 
-const Calculator = () => {
+const Capacity = () => {
   const [product, setProduct] = useState("tanker");
   const [height, setHeight] = useState("");
   const [width, setWidth] = useState("");
@@ -143,4 +143,4 @@ const Calculator = () => {
   );
 };
 
-export default Calculator;
+export default Capacity;

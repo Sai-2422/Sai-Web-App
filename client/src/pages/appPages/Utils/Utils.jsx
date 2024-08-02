@@ -1,42 +1,47 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Button, Card } from "react-bootstrap";
 
 const Utils = () => {
-  const navLinkStyle = {
-    margin: '0 10px',
-    padding: '10px 15px',
-    textDecoration: 'none',
-    color: 'black',
-    borderRadius: '5px',
-    display: 'inline-block'
-  };
-
-  const activeStyle = {
-    color: 'white',
-    backgroundColor: '#007bff'
-  };
-
   return (
-    <nav>
-      <NavLink
-        to="/calculator"
-        style={({ isActive }) => ({
-          ...navLinkStyle,
-          ...(isActive ? activeStyle : {})
-        })}
+    <Card
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "50vh",
+        backgroundColor: "#f8f9fa",
+        border: "1px solid #dee2e6",
+        borderRadius: "8px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <Card.Body
+        style={{
+          width: "50%",
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+        }}
       >
-        Calculator
-      </NavLink>
-      <NavLink
-        to="/price-calculator"
-        style={({ isActive }) => ({
-          ...navLinkStyle,
-          ...(isActive ? activeStyle : {})
-        })}
-      >
-        Price Calculator
-      </NavLink>
-    </nav>
+        <Button
+          as={NavLink}
+          to="/utils/capacity"
+          variant="primary"
+          activeClassName="active"
+        >
+          Calculator
+        </Button>
+        <Button
+          as={NavLink}
+          to="/utils/price-calculator"
+          variant="primary"
+          activeClassName="active"
+        >
+          Price Calculator
+        </Button>
+      </Card.Body>
+    </Card>
   );
 };
 

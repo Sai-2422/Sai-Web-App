@@ -10,7 +10,7 @@ import About from "./pages/appPages/About/About";
 import Footer from "./pages/appPages/Footer/footer";
 import Contact from "./pages/appPages/Contact/Contact";
 import Carousel from "./pages/appPages/Carousel/Carousel";
-import Calculator from "./pages/appPages/Calculator/Calculator";
+import Capacity from "./pages/appPages/Calculator/Capacity";
 import CustomNavbar from "./pages/appPages/Navbar/CustomNavbar";
 import SignUpForm from "./pages/authPages/userPages/SignUp/SignUpForm";
 import SignInForm from "./pages/authPages/userPages/SignIn/SignInForm";
@@ -74,7 +74,8 @@ function App() {
         {/* Utils */}
         <Route path="/utils">
           <Route path="" element={<Utils />} />
-          <Route path="calculator" element={<Calculator />} />
+          <Route path="capacity" element={<Capacity />} />
+          <Route path="price-calculator" element={<Calculator />} />
         </Route>
         {/* Users */}
         <Route path="/user">
