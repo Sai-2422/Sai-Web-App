@@ -65,6 +65,10 @@ const InternsList = () => {
       });
   };
 
+  if (!interns) {
+    return <div >Interns Not Found</div>;
+  }
+
   return (
     <Container className="d-flex justify-content-center">
       {loading ? (

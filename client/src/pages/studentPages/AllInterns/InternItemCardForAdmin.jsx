@@ -20,13 +20,16 @@ const InternItemCardForAdmin = ({
     return <div className={styles.notFound}>Intern Not Found</div>;
   }
 
+  if (!intern || !intern.userId) {
+    return null;
+  }
   return (
     <Card className={styles.internCard}>
       <Card.Body>
         <Row>
           <Col xs={12} sm={4} className="text-center mb-3 mb-sm-0">
             <img
-              src={intern?.userId.profileImg || defaultProfileImage}
+              src={intern.userId.profileImg || defaultProfileImage}
               alt={`${intern.name}`}
               className={styles.internImage}
             />
