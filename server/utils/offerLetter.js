@@ -54,10 +54,14 @@ export const createOfferLetterPDF = async (intern) => {
     });
   doc.moveDown();
 
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const formattedDate = new Date().toLocaleDateString('en-GB', options);
+  
   doc
-    .fontSize(bodyStyle.size)
-    .fillColor(bodyStyle.color)
-    .text(`Date: ${new Date().toLocaleDateString()}`);
+      .fontSize(bodyStyle.size)
+      .fillColor(bodyStyle.color)
+      .text(`Date: ${formattedDate}`);
+  
   doc.moveDown();
 
   doc

@@ -75,10 +75,14 @@ export const createCertificatePDF = async (intern) => {
     );
   doc.moveDown(2);
 
+  const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+  const formattedDate = new Date().toLocaleDateString("en-GB", options);
+
   doc
     .fontSize(bodyStyle.size)
     .fillColor(bodyStyle.color)
-    .text(`Date: ${new Date().toLocaleDateString()}`);
+    .text(`Date: ${formattedDate}`);
+
   doc.moveDown();
 
   doc
@@ -122,21 +126,23 @@ export const createCertificatePDF = async (intern) => {
   doc
     .fontSize(signOffStyle.size)
     .fillColor(signOffStyle.color)
-    .text(`Best Regards,`, signOffX, signOffY+15, { align: "left" });
+    .text(`Best Regards,`, signOffX, signOffY + 15, { align: "left" });
   doc.text(`Revansidha Kanchangire`, signOffX, signOffY + 30, {
     align: "left",
   });
   doc.text(`Proprietor, Shivshakti Agro Industries`, signOffX, signOffY + 45, {
     align: "left",
   });
-  doc.text(`shivshaktiagroindustries12@gmail.com`, signOffX, signOffY + 60, { align: "left" });
+  doc.text(`shivshaktiagroindustries12@gmail.com`, signOffX, signOffY + 60, {
+    align: "left",
+  });
 
   doc.image(aicteImageBuffer, imagesX, signOffY, { height: aicteImageHeight });
   doc.image(msmeImageBuffer, imagesX + imageWidth + spacing, signOffY - 10, {
     height: msmeImageHeight,
   });
 
-  doc.image(signatureImageBuffer, signOffX, signOffY-45, { height: 50 });
+  doc.image(signatureImageBuffer, signOffX, signOffY - 45, { height: 50 });
 
   doc.end();
 
