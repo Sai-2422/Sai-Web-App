@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
 
 // App Pages
+import Utils from "./pages/appPages/Utils/Utils";
 import About from "./pages/appPages/About/About";
 import Footer from "./pages/appPages/Footer/footer";
 import Contact from "./pages/appPages/Contact/Contact";
@@ -69,8 +70,13 @@ function App() {
         <Route path="/" element={<Carousel />} />
         <Route path="/about-us" element={<About />} />
         <Route path="/contact-us" element={<Contact />} />
-        <Route path="/calculator" element={<Calculator />} />
         <Route path="*" element={<NotFoundPage />} />
+        {/* Utils */}
+        <Route path="/utils">
+          <Route path="" element={<Utils />} />
+          <Route path="calculator" element={<Calculator />} />
+        </Route>
+        {/* Users */}
         <Route path="/user">
           <Route path="sign-up" element={<SignUpForm />} />
           <Route path="sign-in" element={<SignInForm />} />
