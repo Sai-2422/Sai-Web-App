@@ -20,7 +20,7 @@ export const getInternDetailsRepo = async (internId) => {
 
 export const deleteInternsByUserId = async (userId) => {
   try {
-    await Intern.deleteMany({ userId });
+    await InternsModel.deleteMany({ userId });
   } catch (error) {
     throw new Error(
       `Error deleting interns for user ${userId}: ${error.message}`
