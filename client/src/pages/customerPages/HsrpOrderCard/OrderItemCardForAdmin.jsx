@@ -12,21 +12,6 @@ const defaultProfileImage =
 const OrderItemCardForAdmin = ({ order, onDeleteOrder, onGetDetails }) => {
   const loading = useSelector(getLoadingState);
 
-  if (!order) {
-    return (
-      <div
-        style={{
-          color: "red",
-          fontSize: "20px",
-          textAlign: "center",
-          marginTop: "20px",
-        }}
-      >
-        Order Not Found
-      </div>
-    );
-  }
-
   return (
     <Card className={styles.orderCard}>
       <Card.Body>

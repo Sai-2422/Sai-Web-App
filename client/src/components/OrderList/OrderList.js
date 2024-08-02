@@ -62,7 +62,16 @@ const OrdersList = () => {
               </Col>
             ))
           ) : (
-            <p>No orders found.</p>
+            <div
+              style={{
+                color: "red",
+                fontSize: "20px",
+                textAlign: "center",
+                marginTop: "20px",
+              }}
+            >
+              Order Not Found
+            </div>
           )}
         </Row>
       )}

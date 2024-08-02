@@ -64,7 +64,16 @@ const ProductDetailsForAdmin = () => {
           </Card.Body>
         </Card>
       ) : (
-        <p>Product not found</p>
+        <div
+          style={{
+            color: "red",
+            fontSize: "20px",
+            textAlign: "center",
+            marginTop: "20px",
+          }}
+        >
+          Product not found
+        </div>
       )}
     </Container>
   );

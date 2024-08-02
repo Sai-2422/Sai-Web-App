@@ -36,7 +36,18 @@ const ProductDesc = () => {
   }
 
   if (!product) {
-    return <div>Product not found!</div>;
+    return (
+      <div
+        style={{
+          color: "red",
+          fontSize: "20px",
+          textAlign: "center",
+          marginTop: "20px",
+        }}
+      >
+        Product not found
+      </div>
+    );
   }
 
   const { title, description, minPrice, maxPrice, pricePerKg, productImg } =
