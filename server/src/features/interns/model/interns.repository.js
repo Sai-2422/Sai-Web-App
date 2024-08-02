@@ -23,7 +23,7 @@ export const deleteInternRepo = async (internshipId) => {
 };
 
 export const findInternEmailRepo = async (internId) => {
-  return await InternsModel.findOne(internId).populate({
+  return await InternsModel.findOne({ _id: internId }).populate({
     path: "userId",
     select: "name email",
   });
