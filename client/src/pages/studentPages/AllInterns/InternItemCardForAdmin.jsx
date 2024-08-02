@@ -21,8 +21,20 @@ const InternItemCardForAdmin = ({
   }
 
   if (!intern || !intern.userId) {
-    return null;
+    return (
+      <div
+        style={{
+          color: "red",
+          fontSize: "20px",
+          textAlign: "center",
+          marginTop: "20px",
+        }}
+      >
+        Intern is Found But User is Deleted
+      </div>
+    );
   }
+
   return (
     <Card className={styles.internCard}>
       <Card.Body>

@@ -66,7 +66,18 @@ const InternsList = () => {
   };
 
   if (!interns) {
-    return <div >Interns Not Found</div>;
+    return (
+      <div
+        style={{
+          color: "red",
+          fontSize: "20px",
+          textAlign: "center",
+          marginTop: "20px",
+        }}
+      >
+        Interns Not Found
+      </div>
+    );
   }
 
   return (
