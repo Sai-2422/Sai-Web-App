@@ -83,7 +83,7 @@ export const sendPasswordResetEmail = async (
                     <p>Hello, ${user.name}</p>
                     <p>We received a request to reset your password. If you did not request this, please ignore this email.</p>
                     <p>To reset your password, you can either use the OTP provided below or click the button.</p>
-                    <p><a class="button" href="https://shivshaktiagroindustries.onrender.com/user/reset-password/${resetPasswordToken}">Reset Password Link</a></p>
+                    <p><a class="button" href="https://shivshaktiagroindustries.vercel.app/user/reset-password/${resetPasswordToken}">Reset Password Link</a></p>
                     <p><strong>OTP: ${resetPasswordOtp}</strong></p>
                     <p>This OTP is valid for 10 minutes only , so please use it promptly.</p>
                     <p>If you have any questions or need further assistance, feel free to contact us.</p>
