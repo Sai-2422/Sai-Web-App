@@ -18,7 +18,7 @@ export const getInternDetailsRepo = async (internId) => {
   });
 };
 
-const deleteInternsByUserId = async (userId) => {
+export const deleteInternsByUserId = async (userId) => {
   try {
     await Intern.deleteMany({ userId });
   } catch (error) {
