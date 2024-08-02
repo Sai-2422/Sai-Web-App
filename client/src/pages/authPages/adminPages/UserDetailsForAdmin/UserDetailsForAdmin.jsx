@@ -56,15 +56,16 @@ const UserDetailsForAdmin = () => {
         </Card>
       ) : (
         <div
-              style={{
-                color: "red",
-                fontSize: "20px",
-                textAlign: "center",
-                marginTop: "20px",
-              }}
-            >
-              User not found
-            </div>
+          style={{
+            color: "red",
+            fontSize: "20px",
+            textAlign: "center",
+            marginTop: "20px",
+            marginBottom: "20px",
+          }}
+        >
+          User not found
+        </div>
       )}
     </Container>
   );

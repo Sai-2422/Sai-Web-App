@@ -92,6 +92,7 @@ const InternsList = () => {
                 fontSize: "20px",
                 textAlign: "center",
                 marginTop: "20px",
+                marginBottom: "20px",
               }}
             >
               No interns found

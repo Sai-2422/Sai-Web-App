@@ -68,6 +68,7 @@ const OrdersList = () => {
                 fontSize: "20px",
                 textAlign: "center",
                 marginTop: "20px",
+                marginBottom: "20px",
               }}
             >
               Order Not Found
