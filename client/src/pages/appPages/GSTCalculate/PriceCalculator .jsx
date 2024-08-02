@@ -18,6 +18,7 @@ const styles = {
   },
   button: {
     marginTop: "1rem",
+    marginBottom: "0.3rem",
   },
 };
 
