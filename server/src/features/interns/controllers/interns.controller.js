@@ -73,7 +73,7 @@ export const getInternDetails = async (req, res, next) => {
 };
 
 export const sendOfferLetter = async (req, res, next) => {
-  const { internId } = req.params;
+  const { internId } = req.body;
   try {
     const intern = await findInternEmailRepo(internId);
     sendOfferLetterEmail(intern);
@@ -86,7 +86,7 @@ export const sendOfferLetter = async (req, res, next) => {
 };
 
 export const sendCertificate = async (req, res, next) => {
-  const { internId } = req.params;
+  const { internId } = req.body;
   try {
     const intern = await findInternEmailRepo(internId);
     sendCertificateEmail(intern);
