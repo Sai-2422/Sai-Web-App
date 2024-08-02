@@ -3,12 +3,10 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import styles from "./InternItemCardForAdmin.module.css";
 import Loader from "../../../UI/Loader";
-import { toast } from "react-toastify";
 import { getLoadingState } from "../../../redux/reducers/internsReducer";
 
 const defaultProfileImage =
   "https://res.cloudinary.com/dqy2ts9h6/image/upload/v1722082558/SAI%20WebApp/profileImage.webp";
-
 const InternItemCardForAdmin = ({
   intern,
   onDeleteIntern,
@@ -18,8 +16,8 @@ const InternItemCardForAdmin = ({
 }) => {
   const loading = useSelector(getLoadingState);
 
-  if (!intern || !intern.userId) {
-    toast.error(`${intern.userId} is deleted`);
+  if (!intern) {
+    return <div className={styles.notFound}>Intern Not Found</div>;
   }
 
   return (
@@ -28,7 +26,7 @@ const InternItemCardForAdmin = ({
         <Row>
           <Col xs={12} sm={4} className="text-center mb-3 mb-sm-0">
             <img
-              src={intern.userId.profileImg || defaultProfileImage}
+              src={intern?.userId.profileImg || defaultProfileImage}
               alt={`${intern.name}`}
               className={styles.internImage}
             />

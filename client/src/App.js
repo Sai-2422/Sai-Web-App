@@ -9,7 +9,6 @@ import About from "./pages/appPages/About/About";
 import Footer from "./pages/appPages/Footer/footer";
 import Contact from "./pages/appPages/Contact/Contact";
 import Carousel from "./pages/appPages/Carousel/Carousel";
-import Calculator from "./pages/appPages/Calculator/Calculator";
 import CustomNavbar from "./pages/appPages/Navbar/CustomNavbar";
 import SignUpForm from "./pages/authPages/userPages/SignUp/SignUpForm";
 import SignInForm from "./pages/authPages/userPages/SignIn/SignInForm";
@@ -69,7 +68,6 @@ function App() {
         <Route path="/" element={<Carousel />} />
         <Route path="/about-us" element={<About />} />
         <Route path="/contact-us" element={<Contact />} />
-        <Route path="/calculator" element={<Calculator />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/user">
           <Route path="sign-up" element={<SignUpForm />} />
@@ -84,6 +82,7 @@ function App() {
           />
         </Route>
         <Route path="/admin">
+
           {/* Hsrp Order */}
           <Route path="hsrp-order" element={<OrdersList />} />
           <Route

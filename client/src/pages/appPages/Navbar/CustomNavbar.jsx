@@ -63,9 +63,6 @@ const CustomNavbar = () => {
               <Nav.Link as={NavLink} to="/about-us" activeClassName="active">
                 About
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/calculator" activeClassName="active">
-                Calculator
-              </Nav.Link>
               <Nav.Link as={NavLink} to="/contact-us" activeClassName="active">
                 Contact
               </Nav.Link>
