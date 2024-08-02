@@ -16,7 +16,18 @@ const ProductItemCardForAdmin = ({
   const loading = useSelector((state) => state.product.loading);
 
   if (!product) {
-    return <div className={styles.notFound}>Product Not Found</div>;
+    return (
+      <div
+        style={{
+          color: "red",
+          fontSize: "20px",
+          textAlign: "center",
+          marginTop: "20px",
+        }}
+      >
+        Product Not Found
+      </div>
+    );
   }
 
   return (

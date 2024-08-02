@@ -13,7 +13,18 @@ const OrderItemCardForAdmin = ({ order, onDeleteOrder, onGetDetails }) => {
   const loading = useSelector(getLoadingState);
 
   if (!order) {
-    return <div className={styles.notFound}>Order Not Found</div>;
+    return (
+      <div
+        style={{
+          color: "red",
+          fontSize: "20px",
+          textAlign: "center",
+          marginTop: "20px",
+        }}
+      >
+        Order Not Found
+      </div>
+    );
   }
 
   return (

@@ -16,7 +16,18 @@ const UserItemCardForAdmin = ({
   const loading = useSelector(getLoadingState);
 
   if (!user) {
-    return <div className={styles.notFound}>Users Not Found</div>;
+    return (
+      <div
+        style={{
+          color: "red",
+          fontSize: "20px",
+          textAlign: "center",
+          marginTop: "20px",
+        }}
+      >
+        Users Not Found
+      </div>
+    );
   }
 
   return (
