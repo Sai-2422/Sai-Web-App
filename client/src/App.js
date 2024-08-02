@@ -14,6 +14,7 @@ import Capacity from "./pages/appPages/Calculator/Capacity";
 import CustomNavbar from "./pages/appPages/Navbar/CustomNavbar";
 import SignUpForm from "./pages/authPages/userPages/SignUp/SignUpForm";
 import SignInForm from "./pages/authPages/userPages/SignIn/SignInForm";
+import PriceCalculator from "./pages/appPages/GSTCalculate/PriceCalculator ";
 
 //Admin Pages
 import UserList from "./components/UesrList/UserList";
@@ -75,7 +76,7 @@ function App() {
         <Route path="/utils">
           <Route path="" element={<Utils />} />
           <Route path="capacity" element={<Capacity />} />
-          <Route path="price-calculator" element={<Calculator />} />
+          <Route path="price-calculator" element={<PriceCalculator />} />
         </Route>
         {/* Users */}
         <Route path="/user">
