@@ -14,7 +14,7 @@ import Capacity from "./pages/appPages/Calculator/Capacity";
 import CustomNavbar from "./pages/appPages/Navbar/CustomNavbar";
 import SignUpForm from "./pages/authPages/userPages/SignUp/SignUpForm";
 import SignInForm from "./pages/authPages/userPages/SignIn/SignInForm";
-import PriceCalculator from "./pages/appPages/GSTCalculate/PriceCalculator ";
+import PriceCalculator from "./pages/appPages/GSTCalculator/PriceCalculator ";
 
 //Admin Pages
 import UserList from "./components/UesrList/UserList";
