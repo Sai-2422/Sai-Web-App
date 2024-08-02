@@ -7,6 +7,7 @@ import { getLoadingState } from "../../../redux/reducers/internsReducer";
 
 const defaultProfileImage =
   "https://res.cloudinary.com/dqy2ts9h6/image/upload/v1722082558/SAI%20WebApp/profileImage.webp";
+
 const InternItemCardForAdmin = ({
   intern,
   onDeleteIntern,
@@ -16,7 +17,7 @@ const InternItemCardForAdmin = ({
 }) => {
   const loading = useSelector(getLoadingState);
 
-  if (!intern) {
+  if (!intern || !intern.userId) {
     return <div className={styles.notFound}>Intern Not Found</div>;
   }
 
@@ -26,7 +27,7 @@ const InternItemCardForAdmin = ({
         <Row>
           <Col xs={12} sm={4} className="text-center mb-3 mb-sm-0">
             <img
-              src={intern?.userId.profileImg || defaultProfileImage}
+              src={intern.userId.profileImg || defaultProfileImage}
               alt={`${intern.name}`}
               className={styles.internImage}
             />
