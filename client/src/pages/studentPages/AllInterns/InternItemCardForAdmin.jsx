@@ -3,6 +3,7 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import styles from "./InternItemCardForAdmin.module.css";
 import Loader from "../../../UI/Loader";
+import { toast } from "react-toastify";
 import { getLoadingState } from "../../../redux/reducers/internsReducer";
 
 const defaultProfileImage =
@@ -18,7 +19,7 @@ const InternItemCardForAdmin = ({
   const loading = useSelector(getLoadingState);
 
   if (!intern || !intern.userId) {
-    return <div className={styles.notFound}>Intern Not Found</div>;
+    toast.error(`${intern.userId} is deleted`);
   }
 
   return (
