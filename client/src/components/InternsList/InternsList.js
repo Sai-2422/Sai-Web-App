@@ -65,21 +65,6 @@ const InternsList = () => {
       });
   };
 
-  if (!interns) {
-    return (
-      <div
-        style={{
-          color: "red",
-          fontSize: "20px",
-          textAlign: "center",
-          marginTop: "20px",
-        }}
-      >
-        Interns Not Found
-      </div>
-    );
-  }
-
   return (
     <Container className="d-flex justify-content-center">
       {loading ? (
@@ -101,7 +86,16 @@ const InternsList = () => {
               </Col>
             ))
           ) : (
-            <p>No interns found.</p>
+            <div
+              style={{
+                color: "red",
+                fontSize: "20px",
+                textAlign: "center",
+                marginTop: "20px",
+              }}
+            >
+              No interns found
+            </div>
           )}
         </Row>
       )}
