@@ -9,12 +9,12 @@ import { auth, authByUserRole } from "../../../../middlewares/auth.js";
 
 const router = express.Router();
 router.route("/create").post(auth, addHsrpOrder);
-router.route("/getAll").get(auth, authByUserRole("admin"), getAllOrders);
+router.route("/getAll").get(auth, authByUserRole(["admin"]), getAllOrders);
 router
   .route("/details/:orderId")
-  .get(auth, authByUserRole("admin"), getOrderDetails);
+  .get(auth, authByUserRole(["admin"]), getOrderDetails);
 router
   .route("/delete/:orderId")
-  .delete(auth, authByUserRole("admin"), deleteOrder);
+  .delete(auth, authByUserRole(["admin"]), deleteOrder);
 
 export default router;

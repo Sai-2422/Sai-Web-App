@@ -5,16 +5,26 @@ import UserModel from "../src/features/user/models/user.schema.js";
 export const auth = async (req, res, next) => {
   const { token } = req.cookies;
   if (!token) {
-    return next(new ApplicationError(401, "login to access this route!"));
+    return next(new ApplicationError(401, "Login to access this route!"));
   }
-  const decodedData = await jwt.verify(token, process.env.JWT_Secret);
-  req.user = await UserModel.findById(decodedData.id);
-  next();
+
+  try {
+    const decodedData = await jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await UserModel.findById(decodedData.id);
+
+    if (!req.user) {
+      return next(new ApplicationError(401, "User not found!"));
+    }
+
+    next();
+  } catch (error) {
+    return next(new ApplicationError(401, "Invalid or expired token!"));
+  }
 };
 
 export const authByUserRole = (roles) => {
-  return async (req, res, next) => {
-    if (req.user.role !== "admin") {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
       return next(
         new ApplicationError(
           403,
@@ -25,3 +35,4 @@ export const authByUserRole = (roles) => {
     next();
   };
 };
+

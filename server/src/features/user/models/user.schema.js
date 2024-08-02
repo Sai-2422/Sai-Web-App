@@ -93,8 +93,8 @@ userSchema.pre("findOneAndUpdate", async function (next) {
 });
 
 userSchema.methods.getJWTToken = function () {
-  return jwt.sign({ id: this._id }, process.env.JWT_Secret, {
-    expiresIn: process.env.JWT_Expire,
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
   });
 };
 

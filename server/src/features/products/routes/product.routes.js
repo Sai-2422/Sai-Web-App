@@ -18,7 +18,7 @@ router
   .route("/add")
   .post(
     auth,
-    authByUserRole("admin"),
+    authByUserRole(["admin"]),
     upload.single("productImg"),
     addNewProduct
   );
@@ -27,13 +27,13 @@ router
   .route("/update/:productId")
   .put(
     auth,
-    authByUserRole("admin"),
+    authByUserRole(["admin"]),
     upload.single("productImg"),
     updateProduct
   );
 
 router
   .route("/delete/:productId")
-  .delete(auth, authByUserRole("admin"), deleteProduct);
+  .delete(auth, authByUserRole(["admin"]), deleteProduct);
 
 export default router;
