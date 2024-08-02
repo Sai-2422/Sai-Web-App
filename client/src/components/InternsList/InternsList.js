@@ -66,7 +66,7 @@ const InternsList = () => {
   };
 
   if (!interns) {
-    return <div className={styles.notFound}>Interns Not Found</div>;
+    return <div>Interns Not Found</div>;
   }
 
   return (
