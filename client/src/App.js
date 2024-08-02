@@ -10,11 +10,11 @@ import About from "./pages/appPages/About/About";
 import Footer from "./pages/appPages/Footer/footer";
 import Contact from "./pages/appPages/Contact/Contact";
 import Carousel from "./pages/appPages/Carousel/Carousel";
-import Capacity from "./pages/appPages/Calculator/Capacity";
+import Capacity from "./pages/appPages/Capacity/Capacity";
 import CustomNavbar from "./pages/appPages/Navbar/CustomNavbar";
 import SignUpForm from "./pages/authPages/userPages/SignUp/SignUpForm";
 import SignInForm from "./pages/authPages/userPages/SignIn/SignInForm";
-import PriceCalculator from "./pages/appPages/GSTCalculator/PriceCalculator ";
+import PriceCalculator from "./pages/appPages/GSTCalculate/PriceCalculator ";
 
 //Admin Pages
 import UserList from "./components/UesrList/UserList";
