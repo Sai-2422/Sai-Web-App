@@ -16,25 +16,6 @@ const InternItemCardForAdmin = ({
 }) => {
   const loading = useSelector(getLoadingState);
 
-  if (!intern) {
-    return <div className={styles.notFound}>Intern Not Found</div>;
-  }
-
-  if (!intern || !intern.userId) {
-    return (
-      <div
-        style={{
-          color: "red",
-          fontSize: "20px",
-          textAlign: "center",
-          marginTop: "20px",
-        }}
-      >
-        Intern is Found But User is Deleted
-      </div>
-    );
-  }
-
   return (
     <Card className={styles.internCard}>
       <Card.Body>

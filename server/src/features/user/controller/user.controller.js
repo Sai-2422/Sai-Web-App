@@ -13,14 +13,14 @@ import {
   findUserForPasswordUsingOtpResetRepo,
   findUserForPasswordUsingTokenResetRepo,
 } from "../models/user.repository.js";
-import { error } from "console";
+import { deleteInternsByUserId } from "../../interns/model/interns.repository.js";
 
 export const createNewUser = async (req, res, next) => {
   const updateData = { ...req.body };
   const profileImg = req.file;
   try {
     if (profileImg) {
-      const base64Image = profileImg.buffer.toString('base64');
+      const base64Image = profileImg.buffer.toString("base64");
       updateData.profileImg = `data:${profileImg.mimetype};base64,${base64Image}`;
     }
     const newUser = await createNewUserRepo(updateData);
@@ -222,7 +222,7 @@ export const updateUserProfile = async (req, res, next) => {
       updateData.profileImg = null;
     }
     if (profileImg) {
-      const base64Image = profileImg.buffer.toString('base64');
+      const base64Image = profileImg.buffer.toString("base64");
       updateData.profileImg = `data:${profileImg.mimetype};base64,${base64Image}`;
     }
 
@@ -236,7 +236,6 @@ export const updateUserProfile = async (req, res, next) => {
     return next(new ApplicationError(400, error.message));
   }
 };
-
 
 export const getAllUsers = async (req, res, next) => {
   try {
@@ -263,16 +262,24 @@ export const getUserDetailsForAdmin = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
   try {
-    const deletedUser = await deleteUserRepo(req.params.id);
+    const userId = req.params.id;
+
+    // Delete the user
+    const deletedUser = await deleteUserRepo(userId);
     if (!deletedUser) {
       return res
         .status(400)
-        .json({ success: false, msg: "no user found with provided id" });
+        .json({ success: false, msg: "No user found with provided id" });
     }
 
-    res
-      .status(200)
-      .json({ success: true, msg: "user deleted successfully", deletedUser });
+    // Delete the interns associated with the user
+    await deleteInternsByUserId(userId);
+
+    res.status(200).json({
+      success: true,
+      msg: "User and associated interns deleted successfully",
+      deletedUser,
+    });
   } catch (error) {
     return next(new ApplicationError(400, error));
   }
@@ -299,7 +306,7 @@ export const updateUserProfileAndRole = async (req, res, next) => {
     }
 
     if (profileImg) {
-      const base64Image = profileImg.buffer.toString('base64');
+      const base64Image = profileImg.buffer.toString("base64");
       updateData.profileImg = `data:${profileImg.mimetype};base64,${base64Image}`;
     }
 

@@ -18,6 +18,16 @@ export const getInternDetailsRepo = async (internId) => {
   });
 };
 
+const deleteInternsByUserId = async (userId) => {
+  try {
+    await Intern.deleteMany({ userId });
+  } catch (error) {
+    throw new Error(
+      `Error deleting interns for user ${userId}: ${error.message}`
+    );
+  }
+};
+
 export const deleteInternRepo = async (internshipId) => {
   return await InternsModel.findByIdAndDelete(internshipId);
 };
