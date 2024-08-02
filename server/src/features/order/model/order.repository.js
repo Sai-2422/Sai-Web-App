@@ -18,6 +18,16 @@ export const getOrderDetailsRepo = async (orderId) => {
   });
 };
 
+export const deleteOrdersByUserId = async (userId) => {
+  try {
+    await OrderModel.deleteMany({ userId });
+  } catch (error) {
+    throw new Error(
+      `Error deleting interns for user ${userId}: ${error.message}`
+    );
+  }
+};
+
 export const deleteOrderRepo = async (orderId) => {
   return await OrderModel.findByIdAndDelete(orderId);
 };

@@ -14,6 +14,7 @@ import {
   findUserForPasswordUsingTokenResetRepo,
 } from "../models/user.repository.js";
 import { deleteInternsByUserId } from "../../interns/model/interns.repository.js";
+import { deleteOrdersByUserId } from "../../order/model/order.repository.js";
 
 export const createNewUser = async (req, res, next) => {
   const updateData = { ...req.body };
@@ -274,6 +275,8 @@ export const deleteUser = async (req, res, next) => {
 
     // Delete the interns associated with the user
     await deleteInternsByUserId(userId);
+     // Delete the orders associated with the user
+    await deleteOrdersByUserId(userId);
 
     res.status(200).json({
       success: true,
