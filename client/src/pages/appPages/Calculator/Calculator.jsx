@@ -37,7 +37,7 @@ const Calculator = () => {
       <Row className="justify-content-center">
         <Col xs={12} sm={10} md={8} lg={6}>
           <h2 className="text-center mb-4">
-            Tanker and Trolley Capacity Calculator
+            Product Volume and Capacity Calculator
           </h2>
           <Form onSubmit={calculateVolumeAndCapacity}>
             <Form.Group className="mb-3" controlId="formHeight">
