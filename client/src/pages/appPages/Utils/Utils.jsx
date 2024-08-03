@@ -39,7 +39,7 @@ const Utils = () => {
           variant="primary"
           style={buttonStyle}
         >
-          Capacity
+          Product Capacity
         </Button>
         <Button
           as={NavLink}

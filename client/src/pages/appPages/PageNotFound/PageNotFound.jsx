@@ -3,6 +3,7 @@ import styles from "./PageNotFound.module.css";
 const NotFoundPage = () => {
   return (
     <div
+      className={styles.notFound}
       style={{
         color: "red",
         fontSize: "20px",
