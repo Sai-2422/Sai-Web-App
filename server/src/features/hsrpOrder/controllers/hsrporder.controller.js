@@ -4,7 +4,7 @@ import {
   deleteOrderRepo,
   getAllOrdersRepo,
   getOrderDetailsRepo,
-} from "../model/order.repository.js";
+} from "../model/hsrporder.repository.js";
 
 export const addHsrpOrder = async (req, res, next) => {
   const requestData = req.body;

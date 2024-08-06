@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import styles from "./OrderItemCardForAdmin.module.css";
 
 import Loader from "../../../UI/Loader";
-import { getLoadingState } from "../../../redux/reducers/orderReducer";
+import { getLoadingState } from "../../../redux/reducers/hsrporderReducer";
 
 const defaultProfileImage =
   "https://res.cloudinary.com/dqy2ts9h6/image/upload/v1722082558/SAI%20WebApp/profileImage.webp";

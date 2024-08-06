@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const defaultProductImage = "https://res.cloudinary.com/dqy2ts9h6/image/upload/v1722082653/SAI%20WebApp/productImage.jpg";
+const defaultProductImage =
+  "https://res.cloudinary.com/dqy2ts9h6/image/upload/v1722082653/SAI%20WebApp/productImage.jpg";
 const ProductCard = ({ product }) => {
   const { _id, title, minPrice, maxPrice, productImg } = product;
   const [imgError, setImgError] = useState(false);
@@ -20,9 +21,11 @@ const ProductCard = ({ product }) => {
         <Card.Text>
           Price: ₹{minPrice} {" - "} ₹{maxPrice}
         </Card.Text>
-        <Link to={`/products/detail/${_id}`} className="btn btn-primary">
-          View Details
-        </Link>
+        <div className="d-flex justify-content-center w-100">
+          <Link to={`/products/detail/${_id}`} className="btn btn-primary w-100">
+            View Details
+          </Link>
+        </div>
       </Card.Body>
     </Card>
   );

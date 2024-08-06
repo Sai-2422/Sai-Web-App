@@ -1,16 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-const API_BASE_URL = `${process.env.REACT_APP_BASE_URL}/order`;
+
+const API_BASE_URL = `${process.env.REACT_APP_BASE_URL}/hsrp-order`;
 
 const initialState = {
   loading: false,
   error: false,
   message: "",
   orders: [],
+  orderDetails: null,
 };
 
-// Thunk to fetch all orders
-export const fetchAllOrders = createAsyncThunk(
-  "orders/fetchAllOrders",
+// Thunk to fetch all HSRP orders
+export const fetchAllHSRPOrders = createAsyncThunk(
+  "orders/fetchAllHSRPOrders",
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch(`${API_BASE_URL}/getAll`, {
@@ -29,9 +31,9 @@ export const fetchAllOrders = createAsyncThunk(
   }
 );
 
-// Thunk to fetch order details
-export const fetchOrderDetails = createAsyncThunk(
-  "orders/fetchOrderDetails",
+// Thunk to fetch HSRP order details
+export const fetchHSRPOrderDetails = createAsyncThunk(
+  "orders/fetchHSRPOrderDetails",
   async (orderId, { rejectWithValue }) => {
     try {
       const response = await fetch(`${API_BASE_URL}/details/${orderId}`, {
@@ -50,9 +52,9 @@ export const fetchOrderDetails = createAsyncThunk(
   }
 );
 
-// Thunk to post a new order
-export const postHsrpRequest = createAsyncThunk(
-  "orders/postHsrpRequest",
+// Thunk to post a new HSRP order
+export const postHsrpOrderRequest = createAsyncThunk(
+  "orders/postHsrpOrderRequest",
   async (orderData, { rejectWithValue }) => {
     try {
       const response = await fetch(`${API_BASE_URL}/create`, {
@@ -75,9 +77,9 @@ export const postHsrpRequest = createAsyncThunk(
   }
 );
 
-// Thunk to delete a order
-export const deleteHsrpRequest = createAsyncThunk(
-  "orders/deleteHsrpRequest",
+// Thunk to delete a HSRP order
+export const deleteHsrpOrderRequest = createAsyncThunk(
+  "orders/deleteHsrpOrderRequest",
   async (orderId, { rejectWithValue }) => {
     try {
       const response = await fetch(`${API_BASE_URL}/delete/${orderId}`, {
@@ -97,79 +99,78 @@ export const deleteHsrpRequest = createAsyncThunk(
 );
 
 const ordersSlice = createSlice({
-  name: "orders",
+  name: "hsrpOrders",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-
-      .addCase(fetchAllOrders.pending, (state) => {
+      .addCase(fetchAllHSRPOrders.pending, (state) => {
         state.loading = true;
         state.error = false;
         state.message = "";
       })
-      .addCase(fetchAllOrders.fulfilled, (state, action) => {
+      .addCase(fetchAllHSRPOrders.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
-        state.orders = action.payload.allOrders;
+        state.orders = action.payload.allOrders; // Adjust according to response structure
       })
-      .addCase(fetchAllOrders.rejected, (state, action) => {
+      .addCase(fetchAllHSRPOrders.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
         state.message = action.payload || "Failed to fetch HSRP orders.";
       })
-      .addCase(fetchOrderDetails.pending, (state) => {
+      .addCase(fetchHSRPOrderDetails.pending, (state) => {
         state.loading = true;
         state.error = false;
         state.message = "";
       })
-      .addCase(fetchOrderDetails.fulfilled, (state, action) => {
+      .addCase(fetchHSRPOrderDetails.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
-        state.orderDetails = action.payload.orderDetails;
+        state.orderDetails = action.payload.orderDetails; // Adjust according to response structure
       })
-      .addCase(fetchOrderDetails.rejected, (state, action) => {
+      .addCase(fetchHSRPOrderDetails.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
-        state.message = action.payload || "Failed to fetch order details.";
+        state.message = action.payload || "Failed to fetch HSRP order details.";
       })
-      .addCase(postHsrpRequest.pending, (state) => {
+      .addCase(postHsrpOrderRequest.pending, (state) => {
         state.loading = true;
         state.error = false;
         state.message = "";
       })
-      .addCase(postHsrpRequest.fulfilled, (state, action) => {
+      .addCase(postHsrpOrderRequest.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
         state.message = "New HSRP order posted successfully.";
       })
-      .addCase(postHsrpRequest.rejected, (state, action) => {
+      .addCase(postHsrpOrderRequest.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
         state.message = action.payload || "Failed to post new HSRP order.";
       })
-      .addCase(deleteHsrpRequest.pending, (state) => {
+      .addCase(deleteHsrpOrderRequest.pending, (state) => {
         state.loading = true;
         state.error = false;
         state.message = "";
       })
-      .addCase(deleteHsrpRequest.fulfilled, (state, action) => {
+      .addCase(deleteHsrpOrderRequest.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
         state.message = "HSRP order deleted successfully.";
       })
-      .addCase(deleteHsrpRequest.rejected, (state, action) => {
+      .addCase(deleteHsrpOrderRequest.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
-        state.message = action.payload || "Failed to delete HSRP oredr.";
+        state.message = action.payload || "Failed to delete HSRP order.";
       });
   },
 });
 
 export default ordersSlice.reducer;
 
-export const getLoadingState = (state) => state.order.loading;
-export const getError = (state) => state.order.error;
-export const getErrorMessage = (state) => state.order.message;
-export const getAllOrders = (state) => state.order.orders;
-export const getOrder = (state) => state.order.orderDetails;
+export const getLoadingState = (state) => state.hsrpOrders.loading;
+export const getError = (state) => state.hsrpOrders.error;
+export const getErrorMessage = (state) => state.hsrpOrders.message;
+export const getAllHSRPOrders = (state) => state.hsrpOrders.orders;
+export const getHSRPOrder = (state) => state.hsrpOrders.orderDetails;

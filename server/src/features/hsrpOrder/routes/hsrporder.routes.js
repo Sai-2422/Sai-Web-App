@@ -4,7 +4,7 @@ import {
   getAllOrders,
   deleteOrder,
   getOrderDetails,
-} from "../controllers/order.controller.js";
+} from "../controllers/hsrporder.controller.js";
 import { auth, authByUserRole } from "../../../../middlewares/auth.js";
 
 const router = express.Router();

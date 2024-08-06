@@ -30,6 +30,7 @@ import ResetPasswordToken from "./pages/authPages/userPages/ForgetPassword/Token
 import UserDetailsForAdmin from "./pages/authPages/adminPages/UserDetailsForAdmin/UserDetailsForAdmin";
 
 //Customer Pages
+import CartList from "./components/CartList/CartList";
 import OrdersList from "./components/OrderList/OrderList";
 import HsrpOrderForm from "./pages/customerPages/CreateHsrpOrder/AddOrder";
 import VehiclePassing from "./pages/customerPages/VehiclePassing/VehiclePassing";
@@ -134,8 +135,9 @@ function App() {
           <Route path="detail/:productId" element={<ProductDesc />} />
         </Route>
         <Route path="/customer">
-          <Route path="post-hsrp-order" element={<HsrpOrderForm />} />
+          <Route path="cart" element={<CartList />} />
           <Route path="passing" element={<VehiclePassing />} />
+          <Route path="post-hsrp-order" element={<HsrpOrderForm />} />
         </Route>
         <Route path="/edu">
           <Route path="" element={<ProductList />} />

@@ -14,7 +14,7 @@ import {
   findUserForPasswordUsingTokenResetRepo,
 } from "../models/user.repository.js";
 import { deleteInternsByUserId } from "../../interns/model/interns.repository.js";
-import { deleteOrdersByUserId } from "../../order/model/order.repository.js";
+import { deleteOrdersByUserId } from "../../hsrpOrder/model/hsrporder.repository.js";
 
 export const createNewUser = async (req, res, next) => {
   const updateData = { ...req.body };

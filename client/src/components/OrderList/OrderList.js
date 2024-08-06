@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchAllOrders,
-  getAllOrders,
+  fetchAllHSRPOrders,
+  getAllHSRPOrders,
   getLoadingState,
   getErrorMessage,
   getError,
-  deleteHsrpRequest,
-} from "../../redux/reducers/orderReducer";
+  deleteHsrpOrderRequest,
+} from "../../redux/reducers/hsrporderReducer";
 import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../UI/Loader";
@@ -17,13 +17,13 @@ import OrderItemCardForAdmin from "../../pages/customerPages/HsrpOrderCard/Order
 const OrdersList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const orders = useSelector(getAllOrders);
+  const orders = useSelector(getAllHSRPOrders);
   const loading = useSelector(getLoadingState);
   const error = useSelector(getError);
   const errorMessage = useSelector(getErrorMessage);
 
   useEffect(() => {
-    dispatch(fetchAllOrders());
+    dispatch(fetchAllHSRPOrders());
   }, [dispatch]);
 
   useEffect(() => {
@@ -33,9 +33,9 @@ const OrdersList = () => {
   }, [error, errorMessage]);
 
   const handleDeleteOrder = (orderId) => {
-    dispatch(deleteHsrpRequest(orderId))
+    dispatch(deleteHsrpOrderRequest(orderId))
       .then(() => {
-        dispatch(fetchAllOrders());
+        dispatch(fetchAllHSRPOrders());
         toast.success("Order deleted successfully");
       })
       .catch((err) => {

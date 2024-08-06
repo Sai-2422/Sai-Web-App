@@ -20,5 +20,5 @@ const orderSchema = new Schema({
   },
 });
 
-const OrderModel = mongoose.model("Order", orderSchema);
-export default OrderModel;
+const HsrpOrderModel = mongoose.model("HsrpOrder", orderSchema);
+export default HsrpOrderModel;

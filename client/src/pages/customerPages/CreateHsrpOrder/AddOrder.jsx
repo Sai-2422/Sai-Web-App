@@ -3,9 +3,9 @@ import { Form, Button, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  postHsrpRequest,
+  postHsrpOrderRequest,
   getLoadingState,
-} from "../../../redux/reducers/orderReducer";
+} from "../../../redux/reducers/hsrporderReducer";
 import { getUser } from "../../../redux/reducers/authReducer";
 import { toast } from "react-toastify";
 import Loader from "../../../UI/Loader";
@@ -45,7 +45,7 @@ const HsrpOrderForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(postHsrpRequest(formData)).unwrap();
+      await dispatch(postHsrpOrderRequest(formData)).unwrap();
       toast.success("Order data posted successfully.");
     } catch (error) {
       toast.error(error.message || "Failed to post order data.");

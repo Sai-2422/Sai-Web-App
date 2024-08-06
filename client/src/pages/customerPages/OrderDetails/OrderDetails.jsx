@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Image, Card } from "react-bootstrap";
 import {
-  getOrder,
+  getHSRPOrder,
   getError,
   getLoadingState,
   getErrorMessage,
-  fetchOrderDetails,
-} from "../../../redux/reducers/orderReducer";
+  fetchHSRPOrderDetails,
+} from "../../../redux/reducers/hsrporderReducer";
 import Loader from "../../../UI/Loader";
 import styles from "./OrderDetails.module.css";
 import { toast } from "react-toastify";
@@ -19,7 +19,7 @@ const defaultProfileImage =
 const OrderDetailsForAdmin = () => {
   const { orderId } = useParams();
   const dispatch = useDispatch();
-  const order = useSelector(getOrder);
+  const order = useSelector(getHSRPOrder);
   const loading = useSelector(getLoadingState);
   const error = useSelector(getError);
   const message = useSelector(getErrorMessage);
@@ -27,7 +27,7 @@ const OrderDetailsForAdmin = () => {
 
   useEffect(() => {
     if (orderId) {
-      dispatch(fetchOrderDetails(orderId));
+      dispatch(fetchHSRPOrderDetails(orderId));
     }
   }, [dispatch, orderId]);
 
