@@ -44,10 +44,12 @@ export const verifyPayment = (
   return expectedSignature === razorpaySignature;
 };
 
-// Create a refund with Razorpay
 export const createRefund = async (paymentId, amount, orderId) => {
+  // Convert the amount from INR to paise by multiplying by 100
+  const amountInPaise = amount * 100;
+  
   return await razorpay.payments.refund(paymentId, {
-    amount,
+    amount: amountInPaise, // Pass the amount in paise
     notes: {
       order_id: orderId,
     },

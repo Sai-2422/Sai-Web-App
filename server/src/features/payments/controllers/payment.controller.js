@@ -11,6 +11,7 @@ import {
   changeRefundStatusInProduct,
   checkIfRefundedInProduct,
 } from "../../productOrder/controllers/productorder.controller.js";
+import { calculateRemainingAmount } from "../../../../utils/razorpayRefund/razorpayRefund.js";
 
 export const createOrderController = async (req, res) => {
   const { amount } = req.body;
@@ -41,13 +42,14 @@ export const verifyPaymentController = (req, res) => {
 export const processRefund = async (req, res) => {
   const { orderId } = req.params;
   const { paymentId, amount, productType } = req.body;
+  const amt = calculateRemainingAmount(amount);
   try {
     const isRefunded = await checkIfRefunded(orderId, productType);
     if (isRefunded) {
       return res.status(400).json({ message: "Payment already refunded" });
     }
 
-    const refund = await createRefund(paymentId, amount, orderId);
+    const refund = await createRefund(paymentId, amt, orderId);
     await changeRefundStatus(orderId, productType);
     res.json({ success: true, refund });
   } catch (error) {
@@ -59,13 +61,14 @@ export const processRefund = async (req, res) => {
 export const manualRefundController = async (req, res) => {
   const { orderId } = req.params;
   const { paymentId, amount, productType } = req.body;
+  const amt = calculateRemainingAmount(amount);
   try {
     const isRefunded = await checkIfRefunded(orderId, productType);
     if (isRefunded) {
       return res.status(400).json({ message: "Payment already refunded" });
     }
     await changeRefundStatus(orderId, productType);
-    const refund = await createRefund(paymentId, amount, orderId);
+    const refund = await createRefund(paymentId, amt, orderId);
     res.json({ success: true, refund });
   } catch (error) {
     console.error(error);

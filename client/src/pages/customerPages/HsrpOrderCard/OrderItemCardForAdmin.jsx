@@ -30,7 +30,14 @@ const OrderItemCardForAdmin = ({
           <Col xs={12} sm={8}>
             <Card.Title>Name: {order.userId?.name}</Card.Title>
             <Card.Text>Registration No: {order.registrationNo}</Card.Text>
-            <Card.Text>Order ID: {order.orderId}</Card.Text>
+            {order.refunded ? (
+                <Card.Text>
+                  <strong>Refunded:</strong>{" "}
+                  {order.refunded
+                    ? "Refund is in processing; expected within 3-7 working days."
+                    : null}
+                </Card.Text>
+              ) : null}
             <div className={styles.buttonGroup}>
               {loading ? (
                 <Loader />

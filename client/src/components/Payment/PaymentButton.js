@@ -21,7 +21,7 @@ const PaymentButton = ({ amount, description, payfor, formData }) => {
         // Update formData to include amount, order_id, and paymentId
         const updatedFormData = { ...formData, amount, order_id, payment_id };
         await dispatch(postHsrpOrderRequest(updatedFormData)).unwrap();
-        toast.success("Order data posted successfully.");
+        toast.success("Order created successfully.");
         return true;
       } catch (error) {
         toast.error(error.message || "Failed to post order data.");

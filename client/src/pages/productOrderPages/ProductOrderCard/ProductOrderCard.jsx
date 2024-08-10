@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button, Col, Row, Modal } from "react-bootstrap";
 import { format } from "date-fns";
+import { calculateRemainingAmount } from "../../../utils/razorpayRefund/razorpayRefund";
 
 const ProductOrderCard = ({ order, onDeleteOrder, onCancelOrder }) => {
   const [showWarning, setShowWarning] = useState(false);
@@ -178,8 +179,9 @@ const ProductOrderCard = ({ order, onDeleteOrder, onCancelOrder }) => {
         <Modal.Body>
           <p>
             Please note that the amount you paid will be refunded to you.
-            However, the 28% GST and Razorpay charges will be deducted from your
-            refund amount.
+            However, Razorpay charges will be deducted from your refund amount.
+            The refunded amount will be{" "}
+            <strong>₹ {calculateRemainingAmount(amount)}</strong>.
           </p>
           <p>
             For more information or assistance, please contact our admin: <br />
