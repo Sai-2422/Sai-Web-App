@@ -1,40 +1,59 @@
 .navbar {
-    background-color: #f8f9fa;
-  }
-  
-  .navLinks {
-    display: flex;
-    align-items: center;
-    color: #000;
-    text-decoration: none;
-  }
-  
-  .iconStyles {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .cartBadge {
-    position: relative;
-    display: inline-block;
-    margin-right: 20px;
-  }
-  
-  .badge {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    padding: 2px 5px;  
-    border-radius: 50%;
-    background-color: red;
-    color: white;
-    font-size: 10px;  
-  }
-  
-  .welcome {
-    margin-right: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333; 
-  }
-  
+  background-color: #f8f9fa;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+}
+
+.iconStyles {
+  width: 35px;
+  height: 35px;
+}
+
+.cartBadge {
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.badgeOrder {
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 10px;
+}
+
+.badgeCart {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 10px;
+}
+
+.welcome {
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+.cartIcons {
+  display: flex;
+  align-items: center;
+  margin-right: 25px;
+}
+
+.orderBasketIcon {
+  margin-right: 10px;
+}

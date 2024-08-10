@@ -4,14 +4,25 @@ import {
   deleteOrderRepo,
   getAllOrdersRepo,
   getOrderDetailsRepo,
+  checkIfRefundedInHsrpRepo,
+  changeRefundStatusInHsrpRepo,
 } from "../model/hsrporder.repository.js";
 
 export const addHsrpOrder = async (req, res, next) => {
-  const requestData = req.body;
+  const { order_id: orderId, payment_id: paymentId, ...requestData } = req.body;
+  // Check if both orderId and paymentId are provided
+  if (!orderId || !paymentId || !requestData) {
+    return next(new ApplicationError(400, "Invalid input data."));
+  }
   try {
-    const customerData = await addHsrpOrderRepo(requestData);
+    const customerData = await addHsrpOrderRepo({
+      ...requestData,
+      orderId,
+      paymentId, // Include paymentId in the data
+    });
     res.status(201).json({ success: true, customerData });
   } catch (error) {
+    console.error(error);
     return next(
       new ApplicationError(500, error.message || "Internal Server Error")
     );
@@ -62,5 +73,31 @@ export const deleteOrder = async (req, res, next) => {
     return next(
       new ApplicationError(500, error.message || "Internal Server Error")
     );
+  }
+};
+
+export const changeRefundStatusInHsrp = async (orderId) => {
+  try {
+    const updatedOrder = await changeRefundStatusInHsrpRepo(orderId);
+    if (!updatedOrder) {
+      throw new ApplicationError(404, `Order with id ${orderId} not found`);
+    }
+    return updatedOrder;
+  } catch (error) {
+    console.error(
+      `Failed to update refund status for order ${orderId}:`,
+      error
+    );
+    throw new ApplicationError(500, "Failed to update refund status");
+  }
+};
+
+export const checkIfRefundedInHsrp = async (orderId) => {
+  try {
+    const isRefunded = await checkIfRefundedInHsrpRepo(orderId);
+    return isRefunded;
+  } catch (error) {
+    console.error(`Failed to check refund status for order ${orderId}:`, error);
+    throw new ApplicationError(500, "Failed to check refund status");
   }
 };

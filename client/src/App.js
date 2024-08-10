@@ -24,6 +24,7 @@ import ProductDesc from "./pages/productPages/ProductCardForUser/ProductDesc";
 import UserDetails from "./pages/authPages/userPages/UserDetails/UserDetails";
 import UpdateProfile from "./pages/authPages/userPages/UpdateProfile/UpdateProfile";
 import UpdatePassword from "./pages/authPages/userPages/UpdatePassword/UpdatePassword";
+import ProductOrdersListForAdmin from "./components/OrderList/ProductOrderListForAdmin";
 import ResetPasswordOtp from "./pages/authPages/userPages/ForgetPassword/OTP/ResetPasswordOtp";
 import UpdateUserByAdmin from "./pages/authPages/adminPages/UpdateUserByAdmin/UpdateUserByAdmin";
 import ResetPasswordToken from "./pages/authPages/userPages/ForgetPassword/Token/ResetPasswordToken";
@@ -31,7 +32,8 @@ import UserDetailsForAdmin from "./pages/authPages/adminPages/UserDetailsForAdmi
 
 //Customer Pages
 import CartList from "./components/CartList/CartList";
-import OrdersList from "./components/OrderList/OrderList";
+import OrdersList from "./components/OrderList/HSRPOrderList";
+import ProductOrdersList from "./components/OrderList/ProductOrderList";
 import HsrpOrderForm from "./pages/customerPages/CreateHsrpOrder/AddOrder";
 import VehiclePassing from "./pages/customerPages/VehiclePassing/VehiclePassing";
 import OrderDetailsForAdmin from "./pages/customerPages/OrderDetails/OrderDetails";
@@ -94,7 +96,7 @@ function App() {
         </Route>
         <Route path="/admin">
           {/* Hsrp Order */}
-          <Route path="hsrp-order" element={<OrdersList />} />
+          <Route path="hsrp-orders" element={<OrdersList />} />
           <Route
             path="order-details/:orderId"
             element={<OrderDetailsForAdmin />}
@@ -119,6 +121,7 @@ function App() {
           />
 
           {/* Products */}
+          <Route path="product-orders" element={<ProductOrdersListForAdmin />} />
           <Route path="products" element={<ProductListForAdmin />} />
           <Route path="add-product" element={<AddProduct />} />
           <Route
@@ -136,6 +139,7 @@ function App() {
         </Route>
         <Route path="/customer">
           <Route path="cart" element={<CartList />} />
+          <Route path="order" element={<ProductOrdersList />} />
           <Route path="passing" element={<VehiclePassing />} />
           <Route path="post-hsrp-order" element={<HsrpOrderForm />} />
         </Route>

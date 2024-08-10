@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  postHsrpOrderRequest,
-  getLoadingState,
-} from "../../../redux/reducers/hsrporderReducer";
-import { getUser } from "../../../redux/reducers/authReducer";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { getLoadingState } from "../../../redux/reducers/hsrporderReducer";
+import { getUser } from "../../../redux/reducers/authReducer";
 import Loader from "../../../UI/Loader";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./AddOrder.module.css";
+import PaymentButton from "../../../components/Payment/PaymentButton";
 
 const HsrpOrderForm = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +20,6 @@ const HsrpOrderForm = () => {
     vehicleClass: "Non-Transport",
   });
 
-  const dispatch = useDispatch();
   const loading = useSelector(getLoadingState);
   const user = useSelector(getUser);
 
@@ -42,13 +39,20 @@ const HsrpOrderForm = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    try {
-      await dispatch(postHsrpOrderRequest(formData)).unwrap();
-      toast.success("Order data posted successfully.");
-    } catch (error) {
-      toast.error(error.message || "Failed to post order data.");
+    if (!user) {
+      toast.error("Please sign in as a customer to book an HSRP order.");
+      return;
+    }
+    // Directly initiate payment
+    initiatePayment();
+  };
+
+  const initiatePayment = () => {
+    const paymentButtonElement = document.getElementById("payment-button");
+    if (paymentButtonElement) {
+      paymentButtonElement.click();
     }
   };
 
@@ -58,7 +62,7 @@ const HsrpOrderForm = () => {
       {loading ? (
         <Loader />
       ) : (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleFormSubmit}>
           <Form.Group
             controlId="formRegistrationNo"
             className={styles.formGroup}
@@ -136,21 +140,20 @@ const HsrpOrderForm = () => {
               name="vehicleClass"
               value={formData.vehicleClass}
               onChange={handleChange}
-              required
               className={styles.formControl}
             >
-              <option value="Transport">Transport</option>
               <option value="Non-Transport">Non-Transport</option>
+              <option value="Transport">Transport</option>
             </Form.Control>
           </Form.Group>
 
-          <Button
-            variant="primary"
-            type="submit"
-            className={styles.submitButton}
-          >
-            Submit
-          </Button>
+          <PaymentButton
+            amount={1200}
+            description="HSRP Order Payment"
+            payfor="HSRP"
+            formData={formData}
+            id="payment-button"
+          />
         </Form>
       )}
     </Container>

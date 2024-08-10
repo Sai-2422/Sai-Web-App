@@ -100,6 +100,9 @@ const OrderDetailsForAdmin = () => {
               <Card.Text>
                 Vehicle Class: {order.vehicleClass || "N/A"}
               </Card.Text>
+              <Card.Text>Order ID: {order.orderId || "N/A"}</Card.Text>
+              <Card.Text>Amount: {order.amount || "N/A"}</Card.Text>
+              <Card.Text>Refund: {order.refunded ? "True" : "False"}</Card.Text>
             </Card.Body>
           </Card>
         </Col>

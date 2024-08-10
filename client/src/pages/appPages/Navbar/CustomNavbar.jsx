@@ -15,10 +15,16 @@ import {
   fetchCartItemsCount,
   getItemCount,
 } from "../../../redux/reducers/cartItemReducer";
+import {
+  fetchOrdersCount,
+  getOrderCount,
+} from "../../../redux/reducers/productorderReducer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./CustomNavbar.module.css";
 
+const orderBasket =
+  "https://res.cloudinary.com/dqy2ts9h6/image/upload/v1723007194/SAI%20WebApp/orderBasket.png";
 const CartIcon =
   "https://res.cloudinary.com/dqy2ts9h6/image/upload/v1722769895/SAI%20WebApp/cartIcon.png";
 const defaultProfileImage =
@@ -31,17 +37,25 @@ const CustomNavbar = () => {
   const user = useSelector(getUser);
   const isAuthenticated = Boolean(user);
   const cartItemsCount = useSelector(getItemCount);
+  const orderItemsCount = useSelector(getOrderCount);
 
   useEffect(() => {
     if (isAuthenticated && user.role === "customer") {
       dispatch(fetchCartItemsCount());
+      dispatch(fetchOrdersCount());
     }
   }, [dispatch, isAuthenticated, user]);
 
   const handleLogout = () => {
-    dispatch(logOut());
-    toast.success("Logout successful");
-    window.location.href = "/";
+    dispatch(logOut())
+      .then(() => {
+        toast.success("Logout successful");
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+        toast.error("Logout failed. Please try again.");
+      });
   };
 
   const profileImageSrc = user?.profileImg || defaultProfileImage;
@@ -86,8 +100,11 @@ const CustomNavbar = () => {
               </Nav.Link>
               {isAuthenticated && userRole === "admin" && (
                 <NavDropdown title="Admin" id="admin-dropdown">
-                  <NavDropdown.Item as={NavLink} to="/admin/hsrp-order">
-                    Get All HSRP Order
+                  <NavDropdown.Item as={NavLink} to="/admin/product-orders">
+                    Get All Product Orders
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/admin/hsrp-orders">
+                    Get All HSRP Orders
                   </NavDropdown.Item>
                   <NavDropdown.Item as={NavLink} to="/admin/add-internship">
                     Add New Internship
@@ -144,23 +161,39 @@ const CustomNavbar = () => {
             </Nav>
             <ButtonGroup className="ms-3 me-3">
               {isAuthenticated && userRole === "customer" && (
-                <NavLink
-                  to="/customer/cart"
-                  className={`${styles.navLinks} ${styles.cartBadge}`}
-                >
-                  <img
-                    className={styles.iconStyles}
-                    src={CartIcon}
-                    alt="Cart"
-                  />
-                  {cartItemsCount > 0 && (
-                    <span className={styles.badge}>{cartItemsCount}</span>
-                  )}
-                </NavLink>
+                <div className={styles.cartIcons}>
+                  <NavLink
+                    to="/customer/order"
+                    className={`${styles.navLinks} ${styles.cartBadge}`}
+                  >
+                    <img
+                      className={`${styles.iconStyles} ${styles.orderBasketIcon}`}
+                      src={orderBasket}
+                      alt="Order Basket"
+                    />
+                    {orderItemsCount > 0 && (
+                      <span className={styles.badgeOrder}>{orderItemsCount}</span>
+                    )}
+                  </NavLink>
+                  <NavLink
+                    to="/customer/cart"
+                    className={`${styles.navLinks} ${styles.cartBadge}`}
+                  >
+                    <img
+                      className={styles.iconStyles}
+                      src={CartIcon}
+                      alt="Cart"
+                    />
+                    {cartItemsCount > 0 && (
+                      <span className={styles.badgeCart}>{cartItemsCount}</span>
+                    )}
+                  </NavLink>
+                </div>
               )}
+
               {isAuthenticated ? (
                 <div className="d-flex justify-content-between align-items-center">
-                  <span className={`${styles.welcome} me-2`}>
+                  <span className={`${styles.welcome} me-3`}>
                     Welcome, {firstName}!
                   </span>{" "}
                   <NavDropdown

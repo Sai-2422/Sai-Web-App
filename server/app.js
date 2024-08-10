@@ -14,6 +14,7 @@ import productRoutes from "./src/features/products/routes/product.routes.js";
 import cartItemsRoutes from "./src/features/cartItems/routes/cartItem.routes.js"
 import hsrporderRoutes from "./src/features/hsrpOrder/routes/hsrporder.routes.js";
 import internshipRoutes from "./src/features/internships/routes/internship.routes.js";
+import productorderRoutes from "./src/features/productOrder/routes/productorder.routes.js"
 
 const app = express();
 app.use(
@@ -37,6 +38,7 @@ app.use("/api/sai/interns", internsRoutes);
 app.use('/api/sai/payment', paymentRoutes);
 app.use("/api/sai/hsrp-order", hsrporderRoutes);
 app.use("/api/sai/internship", internshipRoutes);
+app.use("/api/sai/product-order", productorderRoutes);
 
 app.use(ApplicationErrorMiddleware);
 app.use(handleUncaughtError);

@@ -78,10 +78,19 @@ export const updateCartItemQuantityRepo = async (itemId, quantity) => {
   }
 };
 
-
 export const deleteCartItemRepo = async (itemId) => {
   try {
     const result = await CartItemModel.findByIdAndDelete(itemId);
+    if (!result) throw new Error("Cart item not found");
+    return result;
+  } catch (error) {
+    throw new Error(error.message || "Error deleting cart item");
+  }
+};
+
+export const deleteCartItemBasedProductIdRepo = async (productId) => {
+  try {
+    const result = await CartItemModel.findOneAndDelete({ productId });
     if (!result) throw new Error("Cart item not found");
     return result;
   } catch (error) {

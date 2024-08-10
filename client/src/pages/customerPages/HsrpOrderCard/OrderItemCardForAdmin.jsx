@@ -2,14 +2,18 @@ import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import styles from "./OrderItemCardForAdmin.module.css";
-
 import Loader from "../../../UI/Loader";
 import { getLoadingState } from "../../../redux/reducers/hsrporderReducer";
 
 const defaultProfileImage =
   "https://res.cloudinary.com/dqy2ts9h6/image/upload/v1722082558/SAI%20WebApp/profileImage.webp";
 
-const OrderItemCardForAdmin = ({ order, onDeleteOrder, onGetDetails }) => {
+const OrderItemCardForAdmin = ({
+  order,
+  onDeleteOrder,
+  onGetDetails,
+  onManualRefund,
+}) => {
   const loading = useSelector(getLoadingState);
 
   return (
@@ -26,6 +30,7 @@ const OrderItemCardForAdmin = ({ order, onDeleteOrder, onGetDetails }) => {
           <Col xs={12} sm={8}>
             <Card.Title>Name: {order.userId?.name}</Card.Title>
             <Card.Text>Registration No: {order.registrationNo}</Card.Text>
+            <Card.Text>Order ID: {order.orderId}</Card.Text>
             <div className={styles.buttonGroup}>
               {loading ? (
                 <Loader />
@@ -33,6 +38,9 @@ const OrderItemCardForAdmin = ({ order, onDeleteOrder, onGetDetails }) => {
                 <>
                   <Button variant="primary" onClick={onGetDetails}>
                     Get Details
+                  </Button>
+                  <Button variant="success" onClick={onManualRefund}>
+                    Refund
                   </Button>
                   <Button variant="danger" onClick={onDeleteOrder}>
                     Delete

@@ -36,7 +36,7 @@ const ProductDesc = () => {
 
   const handleAddToCart = async () => {
     if (!user) {
-      toast.error("Sign In to add product to cart.");
+      toast.error("Sign In as Customer to add product to cart.");
       return;
     }
     try {

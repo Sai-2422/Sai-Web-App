@@ -4,9 +4,10 @@ import authReducer from "../reducers/authReducer";
 import internsReducer from "../reducers/internsReducer";
 import productReducer from "../reducers/productReducer";
 import paymentReducer from "../reducers/paymentReducer";
+import cartItemReducer from "../reducers/cartItemReducer";
 import hsrporderReducer from "../reducers/hsrporderReducer";
 import internshipReducer from "../reducers/internshipReducer";
-import cartItemReducer from "../reducers/cartItemReducer";
+import productorderReducer from "../reducers/productorderReducer";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     payment: paymentReducer,
     hsrpOrders: hsrporderReducer,
     internship: internshipReducer,
+    productOrders: productorderReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

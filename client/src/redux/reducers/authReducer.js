@@ -3,7 +3,7 @@ const API_BASE_URL = `${process.env.REACT_APP_BASE_URL}/user`;
 
 // Initial state
 const initialState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem("user")) || null,
   allUsers: [],
   userDetails: null,
   error: false,
@@ -43,7 +43,13 @@ export const signIn = createAsyncThunk(
       throw new Error(await response.text());
     }
 
-    return response.json();
+    const data = await response.json();
+
+    // Store user and token in local storage
+    localStorage.setItem("user", JSON.stringify(data.user));
+    localStorage.setItem("token", data.token);
+
+    return data;
   }
 );
 
@@ -60,6 +66,9 @@ export const logOut = createAsyncThunk("user/logoutUser", async () => {
   if (!response.ok) {
     throw new Error(await response.text());
   }
+
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
 
   return response.json();
 });

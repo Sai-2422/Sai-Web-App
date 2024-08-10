@@ -59,6 +59,61 @@ export const verifyPayment = createAsyncThunk(
   }
 );
 
+// Thunk to request a refund using fetch
+export const requestRefund = createAsyncThunk(
+  "refund/requestRefund",
+  async ({ orderId, paymentId, amount, productType }, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/process-refund/${orderId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ paymentId, amount, productType }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        return rejectWithValue(errorData);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue({ message: error.message });
+    }
+  }
+);
+
+// Thunk to manually request a refund by admin
+export const manualRefund = createAsyncThunk(
+  "refund/manualRefund",
+  async ({ orderId, paymentId, amount, productType }, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/manual-refund/${orderId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ paymentId, amount, productType }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        return rejectWithValue(errorData);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue({ message: error.message });
+    }
+  }
+);
+
 const paymentSlice = createSlice({
   name: "payment",
   initialState,
@@ -94,6 +149,30 @@ const paymentSlice = createSlice({
         state.loading = false;
         state.error = true;
         state.message = action.payload || "Failed to verify payment.";
+      })
+      .addCase(requestRefund.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(requestRefund.fulfilled, (state, action) => {
+        state.loading = false;
+        state.refundStatus = action.payload;
+      })
+      .addCase(requestRefund.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(manualRefund.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(manualRefund.fulfilled, (state, action) => {
+        state.loading = false;
+        state.refundStatus = action.payload;
+      })
+      .addCase(manualRefund.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });

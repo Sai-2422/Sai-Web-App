@@ -1,7 +1,7 @@
 import HsrpOrderModel from "./hsrporder.schema.js";
 
-export const addHsrpOrderRepo = async (internData) => {
-  return await new HsrpOrderModel(internData).save();
+export const addHsrpOrderRepo = async (orderData) => {
+  return await new HsrpOrderModel(orderData).save();
 };
 
 export const getAllOrdersRepo = async () => {
@@ -30,4 +30,27 @@ export const deleteOrdersByUserId = async (userId) => {
 
 export const deleteOrderRepo = async (orderId) => {
   return await HsrpOrderModel.findByIdAndDelete(orderId);
+};
+
+export const changeRefundStatusInHsrpRepo = async (orderId) => {
+  const updatedOrder = await HsrpOrderModel.findOneAndUpdate(
+    { orderId }, 
+    { refunded: true },
+    { new: true } 
+  );
+
+  return updatedOrder; 
+};
+
+export const checkIfRefundedInHsrpRepo = async (orderId) => {
+  const order = await HsrpOrderModel.findOne(
+    { orderId }, 
+    { refunded: 1 } 
+  );
+
+  if (!order) {
+    throw new Error(`Order with id ${orderId} not found`);
+  }
+
+  return order.refunded; 
 };

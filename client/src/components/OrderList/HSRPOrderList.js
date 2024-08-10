@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchAllHSRPOrders,
-  getAllHSRPOrders,
-  getLoadingState,
-  getErrorMessage,
   getError,
+  getErrorMessage,
+  getLoadingState,
+  getAllHSRPOrders,
+  fetchAllHSRPOrders,
   deleteHsrpOrderRequest,
 } from "../../redux/reducers/hsrporderReducer";
+import { manualRefund } from "../../redux/reducers/paymentReducer";
 import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../UI/Loader";
@@ -43,6 +44,23 @@ const OrdersList = () => {
       });
   };
 
+  const handleManualRefund = async (
+    orderId,
+    paymentId,
+    amount,
+    productType
+  ) => {
+    try {
+      await dispatch(
+        manualRefund({ orderId, paymentId, amount, productType })
+      ).unwrap();
+      toast.success("Refund processed successfully");
+      dispatch(fetchAllHSRPOrders()); // Refresh orders list
+    } catch (err) {
+      toast.error(err.message || "Failed to process refund");
+    }
+  };
+
   return (
     <Container className="d-flex justify-content-center">
       {loading ? (
@@ -57,6 +75,14 @@ const OrdersList = () => {
                   onDeleteOrder={() => handleDeleteOrder(order._id)}
                   onGetDetails={() =>
                     navigate(`/admin/order-details/${order._id}`)
+                  }
+                  onManualRefund={() =>
+                    handleManualRefund(
+                      order.orderId,
+                      order.paymentId,
+                      order.amount,
+                      "HSRP"
+                    )
                   }
                 />
               </Col>

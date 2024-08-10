@@ -16,7 +16,6 @@ const razorpay = new Razorpay({
 
 export const createOrder = async (amount) => {
   const options = {
-    // amount in smallest currency unit
     amount: amount * 100,
     currency: "INR",
     receipt: uuidv4(),
@@ -45,3 +44,12 @@ export const verifyPayment = (
   return expectedSignature === razorpaySignature;
 };
 
+// Create a refund with Razorpay
+export const createRefund = async (paymentId, amount, orderId) => {
+  return await razorpay.payments.refund(paymentId, {
+    amount,
+    notes: {
+      order_id: orderId,
+    },
+  });
+};
