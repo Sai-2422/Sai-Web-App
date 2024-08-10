@@ -1,4 +1,5 @@
 import ProductOrderModel from "./productorder.schema.js";
+import { ApplicationError } from "../../../../utils/errorHandler.js";
 
 export const addProductOrderRepo = async (orderData) => {
 return await new ProductOrderModel(orderData).save();
@@ -63,6 +64,16 @@ export const deleteProductOrderRepo = async (orderId) => {
 };
 
 export const changeRefundStatusInProductRepo = async (orderId) => {
+  const order = await ProductOrderModel.findOne({ orderId });
+
+  if (!order) {
+    throw new ApplicationError(404, `Order with id ${orderId} not found`);
+  }
+
+  if (order.status === "delivered") {
+    throw new ApplicationError(400, "Refund cannot be processed. The product is already delivered.");
+  }
+
   const updatedOrder = await ProductOrderModel.findOneAndUpdate(
     { orderId },
     { refunded: true },

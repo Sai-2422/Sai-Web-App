@@ -153,11 +153,10 @@ export const changeRefundStatusInProduct = async (orderId) => {
     }
     return updatedOrder;
   } catch (error) {
-    console.error(
-      `Failed to update refund status for order ${orderId}:`,
-      error
+    throw new ApplicationError(
+      500,
+      error.message || "Failed to update refund status"
     );
-    throw new ApplicationError(500, "Failed to update refund status");
   }
 };
 

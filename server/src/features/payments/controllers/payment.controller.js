@@ -71,8 +71,7 @@ export const manualRefundController = async (req, res) => {
     const refund = await createRefund(paymentId, amt, orderId);
     res.json({ success: true, refund });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to process manual refund" });
+    res.status(500).json({ message: error.message });
   }
 };
 
